@@ -1,0 +1,17 @@
+.nav_link {
+  font-weight: 600;
+}
+.nav_link:hover {
+  color: var(--secondary-color);
+}
+
+.navbar .menu .active {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border-radius: 5px;
+  height: 40px;
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  align-content: center;
+}
