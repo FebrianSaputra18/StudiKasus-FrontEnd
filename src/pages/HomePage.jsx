@@ -2,7 +2,7 @@ import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import Heroine from "../assets/foodhero.png";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, getCart } from "../redux/actions/actionCart";
+import { addToCart, getCart } from "../redux/actions/actionRedux";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 const HomePage = () => {

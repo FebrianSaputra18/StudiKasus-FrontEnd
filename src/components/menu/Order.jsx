@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Card, Col, ListGroup, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getCart } from "../../redux/actions/actionCart";
+import { addToOrder, getCart } from "../../redux/actions/actionRedux";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Order = () => {
   const [addressData, setAddressData] = useState([]);
@@ -13,8 +14,8 @@ const Order = () => {
   const full_name = localStorage.getItem("authName");
   const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   let total = 0;
-
 
   useEffect(() => {
     dispatch(getCart());
@@ -41,6 +42,19 @@ const Order = () => {
   const handleAddAddressClick = () => {
     setShowModal(true);
   };
+  const handlePayment = async(e) => {
+    e.preventDefault();
+    const cartItems = await dispatch(getCart())
+    const deliveryFee = 0;
+    const deliveryAddress = selectedAddress;
+    const dataOrder = {
+      delivery: deliveryFee,
+      delivery_address: deliveryAddress,
+      cart: cartItems,
+    };
+    const response = await dispatch(addToOrder(dataOrder))
+    navigate(`/invoice/${response.payload.order._id}`);
+  }
 
   const handleClose = () => setShowModal(false);
   const handleAddressSelection = (selectedAddress) => {
@@ -148,26 +162,16 @@ const Order = () => {
               >
                 Total Keseluruhan
               </h5>
-              {cartItems?.map((item, index) => {
+              {cartItems?.map((item) => {
                 const subtotal = item.price * item.qty;
                 total += subtotal;
-                <h1>Rp. {subtotal}</h1>;
-              })}
+                })}
+                <h1 >Rp. {total}</h1>
+
+                <button onClick={handlePayment} className="btn btn-success">payment</button>
             </Card.Body>
           </Card>
         </Row>
-        {/* <Card style={{ width: "18rem" }}>
-          <Card.Body>
-            <Card.Title>Payment</Card.Title>
-            
-            {addressData.map((item) => (
-              <ListGroup key={item._id} className="list-group-flush">
-                <ListGroup.Item>You Addresss</ListGroup.Item>
-                <ListGroup.Item>({item.nama})</ListGroup.Item>
-              </ListGroup>
-            ))}
-          </Card.Body>
-        </Card> */}
       </Col>
     </>
   );

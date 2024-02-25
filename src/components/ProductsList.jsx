@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { addToCart } from "../redux/actions/actionCart";
+import { addToCart } from "../redux/actions/actionRedux";
 import toast, { Toaster } from "react-hot-toast";
 
 const ProductsList = () => {

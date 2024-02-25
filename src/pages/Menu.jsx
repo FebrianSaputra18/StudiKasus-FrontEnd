@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Profile from "../components/menu/Profile";
 import Address from "../components/menu/Address";
 import Invoice from "../components/menu/Invoice";
-import Cart from "../components/menu/Cart";
+// import Cart from "../components/menu/Cart";
 import Product from "../components/menu/Product";
 import Category from "../components/menu/Category";
 
@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import Tag from "../components/menu/Tag";
 import toast from "react-hot-toast";
 import Order from "../components/menu/Order";
+import AllCart from "../components/menu/AllCart";
 
 const Menu = () => {
   const [activeTab, setActiveTab] = useState("tab1")
@@ -61,9 +62,6 @@ const Menu = () => {
                     <Nav.Link eventKey="tab4">Cart</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="tab5">Order</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
                     <Nav.Link eventKey="tab6">Invoice</Nav.Link>
                   </Nav.Item>
                   <hr />
@@ -88,7 +86,7 @@ const Menu = () => {
                     <Product />
                   </Tab.Pane>
                   <Tab.Pane eventKey="tab4">
-                    <Cart onButtonClick={handleCartButtonClick}/>
+                    <AllCart onButtonClick={handleCartButtonClick}/>
                   </Tab.Pane>
                   <Tab.Pane eventKey="tab5">
                     <Order />
